@@ -1,0 +1,13 @@
+---
+title: "Crítica dos Dados"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Descrição dos Conjuntos de Dados
+
+
+
