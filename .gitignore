@@ -28,3 +28,5 @@ rsconnect/
 .Rproj.user
 # data directories
 dados
+# data files in root directory
+*.RDS
