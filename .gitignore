@@ -30,3 +30,6 @@ rsconnect/
 dados
 # data files in root directory
 *.RDS
+# output file formats
+*.pdf
+*.html
