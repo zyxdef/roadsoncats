@@ -5,9 +5,30 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+todos <- readRDS("todos.RDS")
 ```
 
-## Descrição dos Conjuntos de Dados
+# Preliminares
+
+```{r}
+todos %>%
+  summary()
+todos %>%
+  by(todos$Species, summary)
+```
+
+# Crítica Rudimentar dos Conjuntos de Dados
+
+Por acaso, a junção de todos os dados extrapola o mapa do Brasil?
+
+```{r plot}
+todos %>%
+  ggplot(aes(x = Longitude, y = Latitude, color = Species)) +
+  geom_point(alpha = .05) 
+```
+
+Não extrapola --> Bom
 
 
 
