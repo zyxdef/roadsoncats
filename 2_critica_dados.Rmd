@@ -1,6 +1,8 @@
 ---
 title: "Crítica dos Dados"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +27,30 @@ Por acaso, a junção de todos os dados extrapola o mapa do Brasil?
 ```{r plot}
 todos %>%
   ggplot(aes(x = Longitude, y = Latitude, color = Species)) +
-  geom_point(alpha = .05) 
+  geom_point(alpha = .5) +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
+todos %>%
+  ggplot(aes(x = Longitude, y = Latitude, color = Species)) +
+  geom_point(alpha = .5) +
+  facet_wrap(~Species) +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
+todos %>%
+  ggplot(aes(x = Longitude, y = Latitude, color = Presence)) +
+  geom_point(alpha = .5) +
+  facet_wrap(~Species) +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
 ```
 
 Não extrapola --> Bom
