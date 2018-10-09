@@ -33,11 +33,11 @@ todos <-
     abas,
     function(aba)
       dados[[aba]] %>%
-      rename_at(ends_with("_P_A"), "Presence") %>% ## tá dando pau aqui
+      rename_all(stringr::str_to_title) %>%
+      rename_at(vars(ends_with("_P_A")), funs((function(x) "Presence"))) %>%
       mutate(Species = aba)
   ) %>%
-  bind_rows() %>%
-  rename(Latitude = latitude, Longitude = longitude) # trocar esse código depois
+  bind_rows()
 
 # salvando os objetos criados
 saveRDS(dados, "dados.RDS")
