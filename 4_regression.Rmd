@@ -1,0 +1,19 @@
+---
+title: "Bayesian Regression Model on the Species Distribution"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Adjusting the Bayesian Regression Model
+
+## Saving Estimates and Model to Disk
+
+# Comparing Estimates from Regression Model and from `maxnet` Package
+
+## Loading the Estimates from `maxnet` Package
+
+## Descriptives and Plots correlation both kinds of Estimates
+

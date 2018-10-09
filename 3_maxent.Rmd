@@ -1,0 +1,18 @@
+---
+title: "Modelling Species Distribution through Maxent with `maxnet` package"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Running Maxent in R with `maxnet` Package
+
+## Saving Estimates to Disk
+
+# Comparing the Estimates from `maxnet` Package and from `Maxent` Software
+
+## Loading the Estimates from `Maxent` Software
+
+## Descriptives and Plots correlation both kinds of Estimates

@@ -1,0 +1,19 @@
+---
+title: "Bayesian Hierarchical Model on Species Distribution"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Adjusting the Bayesian Hierarchical Model
+
+## Saving Estimates and Model to Disk
+
+# Comparing Estimates from Hierarchical Model and from Regression Model 
+
+## Loading the Estimates from Regression Model 
+
+## Descriptives and Plots correlation both kinds of Estimates
+
