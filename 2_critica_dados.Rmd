@@ -13,7 +13,7 @@ todos <- readRDS("todos.RDS")
 
 # Preliminares
 
-```{r}
+```{r discriptives}
 todos %>%
   summary()
 todos %>%
