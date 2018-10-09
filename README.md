@@ -11,12 +11,12 @@ Since
 
 then the modelling steps will be
 
-1. modelling species distribution in R with the package 'maxnet' 
+1. modelling species distribution in R with the package `maxnet`
   (which uses glm on the regressors with some penalty function)
 2. comparing the estimates obtained above with the estimates obtained with Maxent
 3. figuring out the penalty function
-4. building a Bayesian equivalent model
+4. building an equivalent Bayesian regression model
 5. comparing the estimates above with the two above
-6. expanding the Bayesian model above into an hierarchical model, in order to 
-  include dependence among the regressors
+6. expanding the Bayesian regression model above into an hierarchical model, 
+  in order to include dependence among the regressors
 7. generating graphical output on the model above
