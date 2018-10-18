@@ -1,6 +1,10 @@
 ---
-title: "Modelling Species Distribution through Maxent with `maxnet` package"
-output: html_document
+title: "Modelling Species Distribution in R"
+output:
+  pdf_document: 
+    number_sections: yes
+  html_document: 
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -11,23 +15,56 @@ library(maxnet)
 
 **FOR NOW, THIS IS JUST A BETA TEST**
 
-**TESTING ONLY WITH *Puma_concolor* TO SEE IF IT WORKS**
 
-# Running Maxent in R with `maxnet` Package
+# Running Maxent in R
 
-```{r teste}
+** REMEMBER TO MEASURE THE EXECUTION TIMES OF BOTH PROCESSES **
 
+Remember to compair also
+1. numeric precision and accuracy
+2. easy of use
+3. redability and usefulness of output
+
+## Picking a dataset
+
+** TESTING ONLY WITH *Puma_concolor* (smaller dataset) TO SEE IF IT WORKS **
+
+```{r load}
 concolor <- readRDS("dados.RDS")$Puma_concolor
-
-teste <- maxnet::maxnet(p = concolor$P_concolor_P_A, data = concolor[, 2:16])
-
 ```
 
+## Running with the `maxnet` package (which accesses `glmnet` package)
 
-## Saving Estimates to Disk
+<!-- include `, cache=TRUE` later if needed -->
+```{r maxnet} 
+teste1 <- maxnet(p = concolor$P_concolor_P_A, data = concolor[, 2:16])
+teste1
+# plot(teste1)
+```
 
-# Comparing the Estimates from `maxnet` Package and from `Maxent` Software
+<!-- ### Saving Estimates to Disk -->
 
-## Loading the Estimates from `Maxent` Software
+## Running with the `dismo` package (which accesses `Maxent` software directly)
 
-## Descriptives and Plots correlation both kinds of Estimates
+
+<!-- ```{r dismo}  -->
+<!-- teste2 <- ???(p = concolor$P_concolor_P_A, data = concolor[, 2:16]) -->
+<!-- teste2 -->
+<!-- plot(teste1) -->
+<!-- ``` -->
+
+
+<!-- Check https://stackoverflow.com/questions/35082922/running-maxent-in-r -->
+
+** CHECK IF `dismo` IS PASSING THE CORRECT VALUES FOR THE OPTIONS (see Rafa's mail) **
+
+<!-- ### Saving Estimates to Disk -->
+
+# Comparing the estimates from both methods
+
+<!-- ## Loading the Estimates from `Maxent` Software -->
+
+## Correlation
+
+## Biplots 
+
