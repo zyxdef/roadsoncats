@@ -33,3 +33,5 @@ dados
 # output file formats
 *.pdf
 *.html
+# for using cache with Rmd
+/*_files/

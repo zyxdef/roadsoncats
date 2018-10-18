@@ -27,7 +27,7 @@ todos %>%
 
 Por acaso, a junção de todos os pontos de dados extrapola o mapa do Brasil?
 
-```{r presence}
+```{r presence, cache=TRUE}
 todos %>%
   ggplot(aes(x = Longitude, y = Latitude, color = Species)) +
   geom_point(alpha = .5) +
@@ -62,7 +62,7 @@ Não extrapola --> Bom
 
 Os dados ambientais da mesma região foram transcritos da mesma forma para todas as espécie?
 
-```{r ambientais}
+```{r ambientais, cache=TRUE}
 todos %>%
   select(-Fid, -Presence, -Species) %>%
   group_by(Latitude, Longitude) %>% # dentro de cada quadradinho,
