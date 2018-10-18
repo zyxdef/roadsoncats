@@ -10,7 +10,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-library(maxnet)
 ```
 
 **FOR NOW, THIS IS JUST A BETA TEST**
@@ -37,7 +36,7 @@ concolor <- readRDS("dados.RDS")$Puma_concolor
 
 <!-- include `, cache=TRUE` later if needed -->
 ```{r maxnet} 
-teste1 <- maxnet(p = concolor$P_concolor_P_A, data = concolor[, 2:16])
+teste1 <- maxnet::maxnet(p = concolor$P_concolor_P_A, data = concolor[, 2:16])
 teste1
 # plot(teste1)
 ```
@@ -47,11 +46,11 @@ teste1
 ## Running with the `dismo` package (which accesses `Maxent` software directly)
 
 
-<!-- ```{r dismo}  -->
-<!-- teste2 <- ???(p = concolor$P_concolor_P_A, data = concolor[, 2:16]) -->
-<!-- teste2 -->
-<!-- plot(teste1) -->
-<!-- ``` -->
+```{r dismo}
+teste2 <- dismo::maxent(x = concolor[, 2:16], p = concolor$P_concolor_P_A)
+teste2
+# plot(teste2)
+```
 
 
 <!-- Check https://stackoverflow.com/questions/35082922/running-maxent-in-r -->
