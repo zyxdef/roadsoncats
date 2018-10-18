@@ -9,11 +9,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 todos <- readRDS("todos.RDS")
+dados <- readRDS("dados.RDS")
 ```
 
 # Preliminares
 
-```{r discriptives}
+```{r descritivas}
 todos %>%
   summary()
 todos %>%
@@ -22,9 +23,11 @@ todos %>%
 
 # Crítica Rudimentar dos Conjuntos de Dados
 
-Por acaso, a junção de todos os dados extrapola o mapa do Brasil?
+## Pontos de dados
 
-```{r plot}
+Por acaso, a junção de todos os pontos de dados extrapola o mapa do Brasil?
+
+```{r presence}
 todos %>%
   ggplot(aes(x = Longitude, y = Latitude, color = Species)) +
   geom_point(alpha = .5) +
@@ -55,5 +58,66 @@ todos %>%
 
 Não extrapola --> Bom
 
+## Dados ambientais
+
+Os dados ambientais da mesma região foram transcritos da mesma forma para todas as espécie?
+
+```{r ambientais}
+todos %>%
+  select(-Fid, -Presence, -Species) %>%
+  group_by(Latitude, Longitude) %>% # dentro de cada quadradinho,
+  summarise_at(vars(-Latitude, -Longitude), mad) %>% # mede dispersão de cada regressora
+  gather(var, value, -Latitude, -Longitude) %>% 
+  ggplot(aes(x = Longitude, y = Latitude, color = value)) +
+  geom_point() +
+  facet_wrap(~ var) +
+  ggtitle(
+    "Dispersão das características ambientais segundo espécie em cada quadrado",
+    "Desejável == 0"
+  ) +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
+```
+
+Sim, foram transcritos da mesma forma para todas as espécies --> Bom
+
+## Características ambientais segundo os dados
+
+```{r quem_tem_mais}
+lapply(dados, nrow)
+```
+
+Como *Puma_yagouaroundi* tem mais pontos (== quadrinhos), vou trabalhar com ele.
+
+```{r cada_ambiental}
+dados$Puma_yagouaroundi -> teste
+teste %>%
+  select(-FID, -P_yagouaroundi_P_A) %>%
+  gather(var, value, -latitude, -longitude) %>%
+  group_by(var) %>%
+  mutate(value = value / max(value)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = longitude, y = latitude, color = value)) +
+  geom_point(show.legend = FALSE) +
+  facet_wrap(~ var) +
+  ggtitle("Características Ambientais") +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
+options(scipen = 999)
+teste %>%
+  select(-FID, -P_yagouaroundi_P_A) %>%
+  gather(var, value, -latitude, -longitude) %>%
+  group_by(var) %>% 
+  summarise_at(vars(value), funs(min, max)) %>%
+  mutate_at(vars(-var), round, digits = 2)
+options(scipen = 0)
+
+```
 
 
