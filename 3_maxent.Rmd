@@ -34,12 +34,49 @@ concolor <- readRDS("dados.RDS")$Puma_concolor
 
 ## Running with the `maxnet` package (which accesses `glmnet` package)
 
+### Running `maxnet()`
+
 <!-- include `, cache=TRUE` later if needed -->
 ```{r maxnet} 
 teste1 <- maxnet::maxnet(p = concolor$P_concolor_P_A, data = concolor[, 2:16])
-teste1
-# plot(teste1)
 ```
+
+### Presence-absence prediction 
+
+```{r maxnet-predictions} 
+concolor %>%
+  select(latitude, longitude) %>%
+  mutate(predict = dismo::predict(teste1, newdata = concolor[, 2:16], type = "logistic")) %>%
+  ggplot(aes(x = longitude, y = latitude, color = predict)) +
+  geom_point() +
+  coord_fixed() +
+  theme(
+    axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()
+  )
+```
+
+### Response plots for each regressor
+
+```{r maxnet-regressors-plots, warning = FALSE, error = FALSE} 
+plot(teste1, vars = names(teste1$samplemeans[1:4]), type = "logistic")
+plot(teste1, vars = names(teste1$samplemeans[5:8]), type = "logistic")
+plot(teste1, vars = names(teste1$samplemeans[9:12]), type = "logistic")
+plot(teste1, vars = names(teste1$samplemeans[13:15]), type = "logistic")
+```
+
+### Looking at the object returned by `maxnet()`
+
+```{r maxnet-return} 
+
+names(teste1)
+sapply(teste1, class)
+sapply(teste1, length) 
+sapply(teste1, dim)
+```
+
+
+
 
 <!-- ### Saving Estimates to Disk -->
 
